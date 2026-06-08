@@ -1,3 +1,4 @@
+ # -*- coding: utf-8 -*-
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
@@ -14,15 +15,15 @@ CLINIC_INFO = {
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "ahlan bik fi oyadas Oras li tib al asnan!\n\n"
-        "ymknnk al istifsar 3n:\n"
-        "- aowkat   (aowkat al 3aml)\n"
-        "- khadamat (khadamatna)\n"
-        "- as3ar    (al as3ar)\n"
-        "- mawqi3   (mawqi3na)\n"
-        "- maw3id   (hjz maw3id)\n"
-        "- tawasol  (arqam al tawasol)\n\n"
-        "ktb ay klma mn al qaima :)"
+        "اهلا بك في عيادة اوراس لطب الاسنان!\n\n"
+        "يمكنني مساعدتك في:\n"
+        "- اوقات\n"
+        "- خدمات\n"
+        "- اسعار\n"
+        "- موقع\n"
+        "- موعد\n"
+        "- تواصل\n\n"
+        "اكتب اي كلمة من القائمة"
     )
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -33,14 +34,14 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             response = reply
             break
     if not response:
-        response = "3zran lm afham so2alk\nktb: aowkat / khadamat / as3ar / mawqi3 / maw3id / tawasol"
+        response = "عذرا، لم افهم سؤالك\nاكتب: اوقات / خدمات / اسعار / موقع / موعد / تواصل"
     await update.message.reply_text(response)
 
 def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    print("albot ya3mal alan...")
+    print("البوت يعمل الآن...")
     app.run_polling()
 
 if __name__ == "__main__":
